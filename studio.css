@@ -1,0 +1,671 @@
+:root {
+  --line: #373b41;
+  --panel: #232529;
+  --bright: #5198ff;
+  --stage: #111418;
+  --surface: #191c21;
+  --type: #edf0f4;
+  --secondary: #b9c1cd;
+  --accent-text: #99c5ff;
+}
+/* Studio: library / stage / inspector, with a shared scope and transport rail. */
+body {
+  background: #16181b;
+  color: #edf0f4;
+}
+body header {
+  height: 54px;
+  background: #222428;
+  color: #f0f3f6;
+  border-color: #393d43;
+  padding-inline: 22px;
+}
+body header nav a,
+body header .system {
+  color: #a9b1bf;
+}
+body header nav a[aria-current] {
+  color: white;
+  border-color: #579bff;
+}
+body .wordmark svg {
+  stroke: #579bff;
+}
+#lab.bench {
+  color: #e5e9ee;
+  max-width: none;
+  padding: 0;
+  font-family: "Plex Texto", sans-serif;
+}
+.studio {
+  display: grid;
+  grid-template-columns: clamp(185px, 17vw, 250px) minmax(0, 1fr) clamp(
+      195px,
+      19vw,
+      280px
+    );
+  border-bottom: 1px solid var(--line);
+  min-height: 450px;
+}
+.studio aside {
+  padding: 22px 17px;
+  background: var(--panel);
+  min-width: 0;
+}
+.studio .library {
+  border-right: 1px solid var(--line);
+}
+.studio .inspector {
+  border-left: 1px solid var(--line);
+}
+#lab .studio small,
+.signal-label,
+.timeline label {
+  font: 600 10px var(--mono);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #a1a9b5;
+}
+.studio aside small {
+  display: block;
+}
+.studio .library h1,
+.studio .library h2,
+#lab .inspector h2 {
+  font:
+    600 19px "Plex Texto",
+    sans-serif;
+  letter-spacing: -0.5px;
+  margin: 7px 0 8px;
+  color: #edf2f9;
+}
+.studio .library h2 {
+  font-size: 15px;
+}
+#lab .studio p {
+  font-size: 13px;
+  color: #b3bac5;
+  line-height: 1.55;
+  margin: 6px 0 15px;
+}
+.studio hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 20px 0;
+}
+.studio button,
+.studio select,
+.studio input[type="number"],
+.timeline button,
+.timeline select {
+  background: #2a2d32;
+  border: 1px solid #41464f;
+  color: #dce2eb;
+  border-radius: 4px;
+  font:
+    13px "Plex Texto",
+    sans-serif;
+  padding: 7px 10px;
+}
+.studio button:hover:not(:disabled),
+.timeline button:hover:not(:disabled) {
+  border-color: #82b3fc;
+  background: #323944;
+}
+.studio button:disabled {
+  opacity: 0.42;
+}
+.rack {
+  display: grid;
+  gap: 6px;
+}
+.rack button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+}
+.rack svg {
+  width: 36px;
+  height: 21px;
+  color: #81b3fa;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+}
+.rack b {
+  margin-left: auto;
+  color: #adb8c6;
+}
+.models-switch {
+  display: flex;
+  gap: 5px;
+  margin: 10px 0;
+}
+.models-switch button {
+  flex: 1;
+}
+.studio .loaded,
+.studio #show-flow[aria-pressed="true"],
+.timeline #transport {
+  background: #4087ec;
+  color: white;
+  border-color: #599bff;
+}
+#clear {
+  width: 100%;
+}
+.studio .drawing-sheet {
+  padding: 12px;
+  gap: 8px;
+  background: #181a1e;
+  min-width: 0;
+}
+.sheet-heading,
+.sheet-key {
+  background: transparent;
+}
+.studio .sheet-heading {
+  padding: 0 0 6px;
+  border: 0;
+  gap: 7px;
+}
+.studio #view-title {
+  font:
+    600 12px "Plex Texto",
+    sans-serif;
+  background: #25364d;
+  color: #9bc8ff;
+  padding: 8px;
+  border-radius: 3px;
+}
+.studio #part-count {
+  margin-left: auto;
+  color: #a5afbd;
+  font-size: 11px;
+}
+.studio #canvas {
+  background-color: #111418;
+  background-image: radial-gradient(#343f4d 1px, transparent 1px);
+  background-size: 16px 16px;
+  outline: 1px solid #383d44;
+  min-height: 280px;
+  max-height: 55vh;
+}
+.studio #canvas .wire path:last-child {
+  stroke: #7994ae;
+}
+.studio #canvas .item text {
+  stroke: #111418;
+  fill: #e0e9f4;
+}
+.studio #canvas .item path,
+.studio #canvas .item circle {
+  stroke: #8bbdff;
+}
+.studio #canvas .item rect[stroke]:not([stroke="none"]) {
+  stroke: #639eea;
+  fill: #528edc22;
+}
+.studio #canvas .node {
+  fill: #172a40;
+  stroke: #76b6ff;
+}
+.studio #canvas .node[fill="#ffac52"] {
+  fill: #fff;
+}
+.studio .sheet-key {
+  border: 0;
+  padding: 4px 0;
+  color: #a4aebc;
+  gap: 10px;
+}
+.studio #trash {
+  background: transparent;
+  color: #bdc8d7;
+  border-color: #586273;
+  min-height: 32px;
+  min-width: 0;
+}
+.studio #trash.over {
+  background: #633333;
+  color: white;
+}
+.studio .inspector label {
+  display: block;
+  font-size: 12px;
+  color: #c5cbd5;
+  margin: 10px 0 4px;
+}
+.inspector input,
+.inspector select,
+.inspector #remove {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.inspector input[type="range"],
+.timeline input {
+  accent-color: var(--bright);
+  height: 15px;
+  cursor: pointer;
+}
+.inspector #remove {
+  margin-top: 12px;
+}
+.signals {
+  padding: 10px 18px;
+  background: #1c1f23;
+  border-bottom: 1px solid var(--line);
+}
+.signal-label {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0 9px;
+}
+.signal-label span {
+  font-weight: 400;
+  color: #9199a5;
+}
+#readings {
+  gap: 8px;
+}
+.signals .readout {
+  padding: 7px 12px;
+  background: #15181c;
+  border-color: var(--line);
+  border-radius: 2px;
+}
+.readout strong {
+  font: 12px var(--mono);
+}
+.signals .readout svg {
+  display: block;
+  height: 96px;
+  width: 100%;
+}
+.timeline {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-block: 1px solid var(--line);
+  background: #24272c;
+}
+.timeline #meter {
+  font: 13px var(--mono);
+  background: #141a21;
+  color: #8cbcff;
+  padding: 8px;
+  min-width: 0;
+}
+.timeline #time-slider {
+  flex: 1;
+  min-width: 50px;
+}
+.timeline #transport {
+  min-width: 84px;
+}
+#lab #status,
+#lab #signal-state,
+#lab .measurement-help,
+#lab .note {
+  margin: 10px 18px;
+  color: #aeb8c7;
+  font-size: 13px;
+}
+#lab .measurement-help {
+  border-color: var(--line);
+}
+#lab .measurement-help summary {
+  color: #9dc7ff;
+}
+#lab .measurement-help p {
+  color: #bac4d2;
+}
+.studio #free-3d {
+  max-height: 55vh;
+}
+.studio :focus-visible,
+.timeline :focus-visible {
+  outline: 2px solid #77b4ff;
+  outline-offset: 2px;
+}
+@media (max-width: 950px) {
+  .studio {
+    grid-template-columns: 160px minmax(0, 1fr) 175px;
+  }
+  .studio aside {
+    padding: 14px 10px;
+  }
+  .timeline {
+    flex-wrap: wrap;
+  }
+  .timeline label {
+    letter-spacing: 0;
+  }
+  .studio #board-reading {
+    display: none;
+  }
+}
+@media (max-width: 740px) {
+  body header {
+    height: auto;
+    padding: 8px 4% 0;
+  }
+  .studio {
+    grid-template-columns: 1fr;
+  }
+  .studio .library {
+    border: 0;
+    padding: 12px;
+  }
+  .library p,
+  .library hr,
+  .library h2,
+  .library .rack b,
+  .studio .library small {
+    display: none;
+  }
+  .studio .library h1 {
+    margin: 0 0 8px;
+  }
+  .rack {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .rack button {
+    padding: 5px;
+    gap: 4px;
+    justify-content: center;
+  }
+  .rack svg {
+    width: 24px;
+  }
+  .models-switch {
+    display: inline-flex;
+    margin-bottom: 0;
+  }
+  .studio #clear {
+    width: auto;
+    float: right;
+    margin-top: 10px;
+  }
+  .studio .inspector {
+    border: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 6px 12px;
+  }
+  .studio .inspector hr,
+  .studio .inspector small {
+    grid-column: 1/-1;
+    margin: 3px 0;
+  }
+  .studio .inspector input[hidden] {
+    display: none;
+  }
+  .timeline {
+    position: static;
+    gap: 8px;
+  }
+  .timeline #meter {
+    flex: 1;
+  }
+  .timeline #time-slider {
+    min-width: 100px;
+  }
+  .signals #readings {
+    flex-direction: column;
+  }
+  .studio #canvas {
+    min-height: 220px;
+  }
+  .studio .sheet-heading {
+    flex-wrap: wrap;
+  }
+  .studio #part-count {
+    width: 100%;
+    text-align: right;
+  }
+}
+/* Keep the library title at instrument-panel scale, not the legacy chapter-title scale. */
+#lab .library h1,
+#lab .library h2 {
+  font-family: "Plex Texto", sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #edf2f9;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+#lab .library h1 {
+  font-size: 19px;
+  margin: 7px 0 8px;
+}
+#lab .library h2 {
+  font-size: 15px;
+  margin: 7px 0 10px;
+}
+#lab .signals .readout {
+  padding: 12px;
+  min-width: 0;
+}
+#lab .signals .readout svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 390/145;
+}
+#lab .signals .readout strong {
+  font-size: 14px;
+}
+#lab #free-3d {
+  background: #12161c;
+  color-scheme: dark;
+}
+#lab .inspector input[type="number"],
+#lab .inspector select {
+  color: #e6edf6;
+  background: #20242a;
+}
+@media (max-width: 740px) {
+  #lab .library h1 {
+    margin: 0 0 8px;
+  }
+  #lab .signals .readout {
+    padding: 9px;
+  }
+}
+/* Reading and demonstration panels use the same shell and instrument surfaces as the bench. */
+#intro,
+#theory {
+  color: var(--type);
+  background: #16181b;
+  color-scheme: dark;
+}
+#intro .cover {
+  color: var(--type);
+  background: var(--surface);
+  border-color: var(--line);
+}
+#intro .cover h1,
+#theory h1 {
+  font-family: "Plex Texto", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+#intro .cover h1 em {
+  color: var(--accent-text);
+}
+#theory h1 {
+  font-size: clamp(34px, 4.2vw, 60px);
+  line-height: 1.08;
+}
+#intro .cover p,
+#theory p {
+  color: var(--secondary);
+}
+#intro .cover .kicker,
+#theory .kicker {
+  color: var(--accent-text);
+}
+#intro .cover .primary,
+#theory .primary,
+#atlas-play {
+  border: 1px solid #70aaff;
+  border-radius: 4px;
+  background: #2268c5;
+  color: white;
+}
+#intro .cover .primary:hover,
+#theory .primary:hover,
+#atlas-play:hover {
+  background: #2872cf;
+}
+#intro .cover .secondary {
+  color: var(--accent-text);
+}
+#intro .coil-study {
+  background-color: var(--stage);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background-image:
+    linear-gradient(#31394666 1px, transparent 1px),
+    linear-gradient(90deg, #31394666 1px, transparent 1px);
+}
+#intro .coil-study figcaption,
+#intro .plate-foot {
+  color: var(--secondary);
+  border-color: var(--line);
+}
+#intro .route-title,
+#intro .route {
+  background: var(--panel);
+  color: var(--type);
+}
+#intro .route-title {
+  font: 600 11px var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+#intro .route a {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--type);
+}
+#intro .route a:hover {
+  border-color: var(--bright);
+  background: #282e36;
+}
+#intro .route b {
+  color: var(--accent-text);
+}
+#intro .route strong {
+  font:
+    500 18px "Plex Texto",
+    sans-serif;
+}
+#theory .atlas {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+#theory .atlas figcaption {
+  color: var(--type);
+  border-color: var(--line);
+  font:
+    600 19px "Plex Texto",
+    sans-serif;
+}
+#theory .atlas small,
+#theory .paper small {
+  color: var(--accent-text);
+}
+#theory .atlas-body {
+  background-color: var(--stage);
+  background-image: radial-gradient(#313a47 1px, transparent 1px);
+}
+#theory .callouts {
+  background: linear-gradient(90deg, transparent 0 8%, var(--panel) 8%);
+}
+#theory .callouts dt {
+  color: var(--type);
+  font:
+    600 16px "Plex Texto",
+    sans-serif;
+}
+#theory .callouts dd {
+  background: var(--panel);
+  color: var(--secondary);
+}
+#theory .callouts dt b {
+  background: #344152;
+  color: #c8dbf5;
+}
+#theory .callouts button[aria-pressed="true"] {
+  color: var(--accent-text);
+}
+#theory .callouts button[aria-pressed="true"] b {
+  color: #fff;
+  background: #2268c5;
+}
+#theory .wires {
+  filter: none;
+}
+#theory .wires path {
+  stroke: var(--bright);
+}
+#theory .atlas-console {
+  background: var(--panel);
+  border-block: 1px solid var(--line);
+}
+#theory .atlas-console strong,
+#theory .paper h2 {
+  color: var(--type);
+  font-family: "Plex Texto", sans-serif;
+  font-weight: 600;
+}
+#theory .atlas-console output,
+#theory .models dt {
+  color: var(--accent-text);
+}
+#theory .atlas-console input {
+  accent-color: var(--bright);
+}
+#theory .model-notes summary,
+#theory .equation {
+  background: var(--panel);
+  color: var(--type);
+}
+#theory .model-notes summary {
+  border: 1px solid var(--line);
+}
+#theory .paper {
+  border-color: var(--line);
+}
+#theory .equation {
+  border-color: var(--bright);
+}
+:is(#intro, #theory) :focus-visible {
+  outline: 2px solid var(--bright);
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  #theory .callouts {
+    background: var(--panel);
+  }
+  #theory .atlas figcaption {
+    font-size: 17px;
+  }
+}
+.inspector #rotate {
+  width: 100%;
+  margin-top: 10px;
+}

@@ -1,0 +1,545 @@
+/* Light drafting desk — navigation, reading surface and instruments share one scale. */
+:root {
+  --desk: #f6f5ef;
+  --sheet: #fffefa;
+  --text: #202e40;
+  --muted: #526172;
+  --rule: #bfc8d0;
+  --blue: #204f9b;
+}
+body {
+  color: var(--text);
+  background: var(--desk);
+}
+header {
+  background: var(--sheet);
+  color: var(--text);
+  border-bottom: 1px solid var(--rule);
+  height: 62px;
+  padding-inline: 5%;
+  gap: 18px;
+}
+header .wordmark {
+  font:
+    bold 23px "Plex Texto",
+    sans-serif;
+  letter-spacing: -1.6px;
+}
+header .wordmark svg {
+  stroke: var(--blue);
+}
+header nav a,
+header .system {
+  color: var(--muted);
+}
+header nav a[aria-current] {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+header .system {
+  font: 14px var(--display);
+  letter-spacing: 0;
+}
+nav a:hover {
+  color: var(--blue);
+}
+.cover {
+  background: var(--desk);
+  border-bottom: 1px solid var(--rule);
+  min-height: clamp(420px, 57vh, 620px);
+  color: var(--text);
+}
+.cover::before {
+  display: none;
+}
+.covercopy {
+  margin-block: 42px;
+}
+.filmmeta,
+.frameid,
+.route small,
+.route-title span + span {
+  display: none;
+}
+.cover h1 {
+  font-size: clamp(58px, 6.5vw, 94px);
+  letter-spacing: -0.06em;
+}
+.cover h1 em {
+  color: var(--blue);
+}
+.cover p,
+.deck {
+  color: var(--muted);
+  text-shadow: none;
+}
+.cover .kicker,
+.kicker,
+.theory-head .kicker {
+  color: var(--blue);
+  letter-spacing: 0.07em;
+}
+.cover .primary,
+.primary,
+#play,
+#solve {
+  color: white;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 3px;
+}
+.cover .secondary,
+.secondary {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.primary:hover {
+  background: #183d77;
+  color: white;
+}
+.coil-study {
+  background-color: #25497d;
+  border: 0;
+  color: white;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+.coil-study figcaption,
+.plate-foot {
+  font-size: 10px;
+}
+.plate-foot strong {
+  font-size: 16px;
+}
+.route-title,
+.route,
+#intro {
+  background: var(--sheet);
+}
+.route-title {
+  font: 500 19px var(--display);
+  letter-spacing: 0;
+}
+.route {
+  gap: 22px;
+}
+.route a,
+.route a:first-child {
+  padding: 14px 0;
+  border-color: var(--rule);
+  gap: 12px;
+}
+.route b,
+.route a:first-child b {
+  font: 12px var(--mono);
+  color: var(--muted);
+}
+.route strong {
+  font: 500 20px var(--display);
+  margin: 0;
+}
+.route i {
+  display: none;
+}
+#theory {
+  background: var(--desk);
+}
+.atlas,
+.config,
+.scene,
+#lab article,
+.chart,
+.editor-entry,
+.theory-actions {
+  border-radius: 2px;
+  box-shadow: none;
+}
+.editor-entry {
+  color: var(--text);
+  background: #e6edf6;
+  border: 1px solid #b6c8df;
+  border-left: 3px solid var(--blue);
+}
+.editor-entry b,
+.labtitle .theory-link {
+  color: var(--blue);
+}
+#lab article {
+  background: var(--sheet);
+  border-color: var(--rule);
+}
+#lab h2,
+.config label[for="bank-mode"],
+#r-total,
+#branches,
+.effect small {
+  color: var(--text);
+}
+#caption,
+#result,
+.effect p,
+#lab h4,
+#legend {
+  color: var(--muted);
+}
+.config #tabs,
+.telemetry {
+  background: #e8edf2;
+}
+.telemetry b,
+.telemetry small {
+  color: #294462;
+}
+.config #tabs button {
+  color: var(--text);
+}
+.config #tabs .active {
+  background: var(--blue);
+  color: #fff;
+}
+.row output,
+#lab h2 i {
+  background: #e2ebf6;
+  color: var(--blue);
+}
+button,
+select,
+#add-r {
+  background: var(--sheet);
+  color: var(--text);
+  border-color: var(--rule);
+  border-radius: 3px;
+}
+button:hover {
+  border-color: var(--blue);
+}
+.chart {
+  color: white;
+}
+.effect {
+  border-color: var(--rule);
+}
+input[type="range"] {
+  accent-color: var(--blue);
+}
+dialog {
+  background: var(--sheet);
+  color: var(--text);
+}
+/* The editor is a single work surface, with tools above the drawing rather than floating cards. */
+.bench {
+  max-width: 1340px;
+  padding: 28px 5%;
+}
+.bench h1 {
+  font-size: clamp(36px, 4vw, 54px);
+  letter-spacing: -0.045em;
+  margin: 6px 0;
+}
+.bench p,
+.bench #status {
+  color: var(--muted);
+}
+.bench .kicker {
+  font:
+    13px "Plex Texto",
+    sans-serif;
+  letter-spacing: 0;
+}
+.tools {
+  border: 1px solid var(--rule);
+  border-bottom: 0;
+  background: #f0f1ed;
+  margin: 18px 0 0;
+  padding: 9px 12px;
+  align-items: center;
+}
+.tools small,
+.sheet-heading span,
+.sheet-key {
+  color: var(--muted);
+  font: 11px var(--mono);
+}
+.tools small {
+  margin-right: 5px;
+}
+.tools #clear {
+  margin-left: auto;
+}
+.workspace {
+  gap: 0;
+  border: 1px solid var(--rule);
+  background: var(--sheet);
+  grid-template-columns: minmax(0, 1fr) 235px;
+}
+.drawing-sheet {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.sheet-heading,
+.sheet-key {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #cfd5d8;
+}
+.sheet-heading strong {
+  font: 500 18px var(--display);
+}
+#canvas {
+  flex: 1;
+  border-radius: 0;
+  background-color: #fcfcf8;
+  background-image:
+    linear-gradient(#6285a40c 1px, transparent 1px),
+    linear-gradient(90deg, #6285a40c 1px, transparent 1px),
+    radial-gradient(#8daac2 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.sheet-key {
+  border-top: 1px solid var(--rule);
+  border-bottom: 0;
+  justify-content: flex-start;
+  gap: 15px;
+}
+.sheet-key span:last-child {
+  margin-left: auto;
+}
+.workspace aside {
+  background: #f5f6f2;
+  border: 0;
+  border-left: 1px solid var(--rule);
+  border-radius: 0;
+}
+.workspace aside small {
+  font:
+    600 13px "Plex Texto",
+    sans-serif;
+  color: var(--blue);
+}
+.workspace aside h2 {
+  font: 500 21px var(--display);
+  color: var(--text);
+}
+.workspace input {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+.workspace hr {
+  border-color: var(--rule);
+}
+.readout {
+  border-radius: 2px;
+  color: #eef5ff;
+}
+#status {
+  border-left: 2px solid var(--blue);
+  padding-left: 12px;
+}
+.bench .note {
+  max-width: 92ch;
+}
+@media (max-width: 760px) {
+  header {
+    height: auto;
+    gap: 5px;
+  }
+  .covercopy {
+    margin: 32px 0 20px;
+  }
+  .coil-study {
+    margin-bottom: 22px;
+  }
+  .cover {
+    min-height: 0;
+  }
+  .route {
+    gap: 0;
+  }
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+  .workspace aside {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tools #clear {
+    margin-left: 0;
+  }
+  .sheet-key span:last-child {
+    display: none;
+  }
+  .tools {
+    gap: 5px;
+  }
+  .tools button {
+    font-size: 12px;
+  }
+  .workspace aside small,
+  .workspace #remove {
+    grid-column: 1/-1;
+  }
+  .bench {
+    padding-inline: 4%;
+  }
+  .editor-entry {
+    flex-wrap: wrap;
+  }
+  .system {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  header nav {
+    gap: 6px;
+  }
+  nav a {
+    font-size: 11px;
+  }
+}
+#lab.bench {
+  max-width: 1340px;
+  padding: 28px 5%;
+}
+.sheet-heading {
+  gap: 10px;
+}
+.sheet-heading button {
+  margin-right: auto;
+}
+#canvas,
+#canvas * {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#canvas.holding,
+#canvas.holding * {
+  cursor: grabbing;
+}
+.draft {
+  stroke: #2760b4;
+  stroke-width: 3;
+  stroke-dasharray: 6 4;
+  pointer-events: none;
+}
+#free-3d {
+  height: clamp(230px, 43vw, 540px);
+  overflow: hidden;
+}
+#free-3d[hidden] {
+  display: none;
+}
+#free-3d canvas {
+  display: block;
+  touch-action: none;
+}
+.tools select {
+  width: auto;
+}
+#canvas {
+  background-color: #f3f6ed;
+  background-image: radial-gradient(#aebdac 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+#canvas .item text {
+  font-family: var(--mono);
+  fill: #30475a;
+  paint-order: stroke;
+  stroke: #f3f6ed;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+#canvas .item text:first-of-type {
+  font-weight: 700;
+  font-size: 14px;
+}
+#canvas .node {
+  stroke-width: 2;
+  paint-order: stroke;
+}
+#canvas .node:hover {
+  stroke-width: 5;
+}
+#view-title {
+  white-space: nowrap;
+}
+.sheet-key {
+  flex-wrap: wrap;
+}
+.sheet-key #trash {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 115px;
+  min-height: 44px;
+  padding: 7px 11px;
+  border: 1px dashed #9aabb7;
+  background: #f9faf6;
+  color: #354556;
+  font:
+    13px "Plex Texto",
+    sans-serif;
+}
+.sheet-key #trash span {
+  display: inline;
+  margin: 0;
+}
+.sheet-key #trash.over {
+  color: #842f20;
+  border: 2px solid #a04130;
+  background: #ffdfd5;
+}
+#trash:disabled {
+  opacity: 0.6;
+}
+.drawing-sheet:has(#free-3d:not([hidden])) #trash {
+  display: none;
+}
+.presets {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+.sheet-heading {
+  flex-wrap: wrap;
+}
+.sheet-heading #projection {
+  margin-right: 0;
+}
+#show-flow[aria-pressed="true"] {
+  background: var(--blue);
+  color: white;
+}
+.measurement-help {
+  border-top: 1px solid var(--rule);
+  padding: 12px 0;
+}
+.measurement-help summary {
+  cursor: pointer;
+  color: var(--blue);
+}
+.bench .measurement-help p {
+  font-size: 14px;
+  max-width: 84ch;
+  margin: 8px 0;
+}
+.workspace aside input[type="range"] {
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  accent-color: var(--blue);
+}
+.workspace aside input[type="range"]:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

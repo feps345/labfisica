@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>LabFisica | Banco de circuitos</title
+  ><link rel="stylesheet" href="style.css" /><link
+    rel="stylesheet"
+    href="cinema.css"
+  /><link rel="stylesheet" href="editor.css" /><link
+    rel="stylesheet"
+    href="workshop.css"
+  /><link rel="stylesheet" href="studio.css" />
+  <header>
+    <a href="#introduccion" class="wordmark"
+      ><svg viewBox="0 0 34 32" aria-hidden="true">
+        <path d="M1 17h7l5-12 6 22 5-14 3 4h6" /></svg
+      >Lab<span>Fisica</span></a
+    >
+    <nav aria-label="Capítulos">
+      <a href="#introduccion">Introducción</a
+      ><a href="#fundamentos">Marco teórico</a
+      ><a href="#laboratorio">Laboratorio</a>
+    </nav>
+    <div class="system">Física II</div>
+  </header>
+  <main>
+    <section id="intro" class="chapter">
+      <div class="cover">
+        <div class="filmmeta">Electricidad y magnetismo</div>
+        <div class="covercopy">
+          <div class="kicker"><span></span> Práctica 01</div>
+          <h1>Circuitos<br /><em>eléctricos</em></h1>
+          <div class="actions">
+            <a class="primary" href="#fundamentos">Ver el modelo</a
+            ><a class="secondary" href="#laboratorio">Construir y simular →</a>
+          </div>
+        </div>
+        <figure class="coil-study">
+          <figcaption>
+            <span>OSCILACIÓN AMORTIGUADA</span><span>LÁM. 01</span>
+          </figcaption>
+          <svg
+            id="coil-drawing"
+            viewBox="0 0 520 300"
+            role="img"
+            aria-label="Estudio geométrico de una oscilación amortiguada"
+          >
+            <g id="windings"></g>
+            <g class="leaders">
+              <path d="M76 123L43 73H12M286 115l44 -68h124" />
+              <text x="12" y="62">01 / EXCITACIÓN</text>
+              <text x="334" y="38">02 / DECAIMIENTO</text>
+            </g>
+          </svg>
+          <div class="plate-foot">
+            <strong>Fig. 1</strong
+            ><span>La amplitud disminuye con el tiempo.</span><b>∿</b>
+          </div>
+        </figure>
+        <div class="frameid">R　·　L　·　C</div>
+      </div>
+      <div class="route-title">
+        <span>Contenido de la práctica</span><span>RC　/　RL　/　RLC</span>
+      </div>
+      <div class="route">
+        <a href="#fundamentos"
+          ><b>01</b>
+          <div><small>MODELO</small><strong>Marco teórico</strong></div>
+          <i>◉</i></a
+        ><a href="#laboratorio"
+          ><b>02</b>
+          <div><small>MONTAJE</small><strong>Laboratorio</strong></div>
+          <i>↗</i></a
+        >
+      </div>
+    </section>
+    <section id="theory" class="chapter" hidden>
+      <div class="theory-head">
+        <div class="kicker"><span></span> PASO 01　/　 MODELO</div>
+        <h1>Componentes del circuito</h1>
+        <p>
+          En una conexión en serie, todos los componentes conducen la misma
+          corriente. Lo que cambia de un elemento a otro es la caída de tensión.
+        </p>
+      </div>
+      <figure class="atlas" aria-labelledby="atlas-title">
+        <figcaption>
+          <span id="atlas-title">Anatomía del circuito RLC</span
+          ><small>MODELO INTERACTIVO · SERIE RLC</small>
+        </figcaption>
+        <div class="atlas-body">
+          <svg
+            class="board"
+            viewBox="0 0 500 360"
+            role="group"
+            aria-label="Montaje en perspectiva: resistencia y bobina en la rama posterior, capacitor a la derecha y fuente en la rama delantera."
+          >
+            <defs>
+              <linearGradient
+                id="substrate"
+                x2="1"
+                y2="1"
+                gradientUnits="objectBoundingBox"
+              >
+                <stop stop-color="#4672b4" />
+                <stop offset="1" stop-color="#13366c" />
+              </linearGradient>
+              <linearGradient id="case" x2="0" y2="1">
+                <stop stop-color="#aac9f7" />
+                <stop offset=".4" stop-color="#4879bb" />
+                <stop offset="1" stop-color="#153458" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M29 195 303 66 470 156 470 170 195 305 29 210Z"
+              fill="#132a50"
+            />
+            <path
+              d="M29 195 303 66 470 156 195 291Z"
+              fill="url(#substrate)"
+              stroke="#83a8da"
+            />
+            <g fill="#bacde9" stroke="#233e65" stroke-width="2">
+              <ellipse cx="53" cy="196" rx="5" ry="3" />
+              <ellipse cx="302" cy="78" rx="5" ry="3" />
+              <ellipse cx="445" cy="156" rx="5" ry="3" />
+              <ellipse cx="195" cy="278" rx="5" ry="3" />
+            </g>
+            <path
+              d="M75 190 294 89 422 157 199 261Z"
+              fill="none"
+              stroke="#19385f"
+              stroke-width="8"
+            />
+            <path
+              d="M75 186 294 85 422 153 199 257Z"
+              fill="none"
+              stroke="#cbdcf2"
+              stroke-width="4"
+              stroke-linejoin="round"
+            />
+            <path
+              id="atlas-flow"
+              d="M75 186 294 85 422 153 199 257Z"
+              pathLength="100"
+              fill="none"
+              stroke="#95f1ff"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-dasharray=".5 5.75"
+            />
+            <g
+              data-part="r"
+              role="button"
+              tabindex="0"
+              aria-label="Examinar: Resistencia"
+              transform="translate(164 145) rotate(-25)"
+            >
+              <rect
+                x="-36"
+                y="-10"
+                width="72"
+                height="20"
+                rx="8"
+                fill="#edd4a2"
+                stroke="#775f49"
+              />
+              <path
+                d="M-22 -9v18m11 -19v20m12 -20v20"
+                stroke="#885338"
+                stroke-width="5"
+              />
+              <path d="M22 -9v18" stroke="#b59245" stroke-width="4" />
+            </g>
+            <g
+              data-part="l"
+              role="button"
+              tabindex="0"
+              aria-label="Examinar: Bobina"
+              transform="translate(350 111) rotate(28)"
+            >
+              <rect
+                x="-38"
+                y="-10"
+                width="76"
+                height="20"
+                rx="7"
+                fill="#263956"
+              />
+              <g id="turns" fill="none" stroke="#f9b77b" stroke-width="4">
+                <ellipse cx="-29" rx="5" ry="14" />
+                <ellipse cx="-19" rx="5" ry="14" />
+                <ellipse cx="-9" rx="5" ry="14" />
+                <ellipse cx="1" rx="5" ry="14" />
+                <ellipse cx="11" rx="5" ry="14" />
+                <ellipse cx="21" rx="5" ry="14" />
+                <ellipse cx="31" rx="5" ry="14" />
+              </g>
+            </g>
+            <g
+              data-part="c"
+              role="button"
+              tabindex="0"
+              aria-label="Examinar: Capacitor"
+              transform="translate(326 197) rotate(-25)"
+            >
+              <path d="M-8 -21h16v42H-8Z" fill="#274d84" />
+              <ellipse cx="-8" rx="7" ry="21" fill="#76b8f4" stroke="#d7ebff" />
+              <ellipse cx="8" rx="7" ry="21" fill="#92cbff" stroke="#d7ebff" />
+            </g>
+            <g
+              data-part="v"
+              role="button"
+              tabindex="0"
+              aria-label="Examinar: Fuente"
+              transform="translate(142 224) rotate(29)"
+            >
+              <rect
+                x="-40"
+                y="-16"
+                width="80"
+                height="32"
+                rx="5"
+                fill="url(#case)"
+                stroke="#b1c7e4"
+              />
+              <path d="M-30 -15v30" stroke="#eeaf73" stroke-width="8" />
+              <text
+                x="-21"
+                y="5"
+                fill="white"
+                font-family="monospace"
+                font-size="15"
+              >
+                +　−
+              </text>
+            </g>
+            <g fill="#fff" stroke="#2349a0" stroke-width="2">
+              <circle id="pin-r" cx="166" cy="138" r="4" />
+              <circle id="pin-l" cx="370" cy="115" r="4" />
+              <circle id="pin-c" cx="336" cy="198" r="4" />
+              <circle id="pin-v" cx="145" cy="229" r="4" />
+            </g>
+          </svg>
+          <svg class="wires" aria-hidden="true"></svg>
+          <dl class="callouts">
+            <div data-pin="r">
+              <dt>
+                <button type="button"><b>R</b> Resistencia</button>
+              </dt>
+              <dd>
+                Limita la corriente y disipa energía en forma de calor. Su caída
+                de tensión es proporcional a la corriente: vᵣ = Ri.
+              </dd>
+            </div>
+            <div data-pin="l">
+              <dt>
+                <button type="button"><b>L</b> Bobina</button>
+              </dt>
+              <dd>
+                Almacena energía en un campo magnético. La tensión entre sus
+                extremos depende de qué tan rápido cambia la corriente: vₗ = L
+                di/dt.
+              </dd>
+            </div>
+            <div data-pin="c">
+              <dt>
+                <button type="button"><b>C</b> Capacitor</button>
+              </dt>
+              <dd>
+                Separa cargas en dos placas y almacena energía en el campo
+                eléctrico entre ellas. Su voltaje aumenta con la carga: v꜀ =
+                q/C.
+              </dd>
+            </div>
+            <div data-pin="v">
+              <dt>
+                <button type="button"><b>Vₛ</b> Fuente</button>
+              </dt>
+              <dd>
+                Aplica la tensión que impulsa la corriente en la malla. En este
+                montaje, pasa de 0 a 5 V al cerrar el circuito.
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="atlas-console">
+          <div>
+            <small>SONDA DE MEDIDA</small><strong id="probe-name"></strong
+            ><output id="probe-value"></output>
+          </div>
+          <div>
+            <button id="atlas-play">Aplicar 5 V　▷</button
+            ><label for="atlas-time"
+              >Explorar el instante <output id="atlas-ms">0 ms</output></label
+            ><input
+              id="atlas-time"
+              type="range"
+              min="0"
+              max="60"
+              step="0.1"
+              value="0"
+            />
+          </div>
+        </div>
+        <p class="atlas-help">
+          Toca una pieza para conectar la sonda. Aplica el escalón de 5 V o
+          desplaza el tiempo para inspeccionar la respuesta. R = 20 Ω · L = 100
+          mH · C = 100 µF.
+        </p>
+      </figure>
+      <details class="model-notes">
+        <summary>Ver las ecuaciones y comparar RC, RL y RLC</summary>
+        <div class="paper">
+          <div class="paper-title">
+            <small>LEY DE KIRCHHOFF</small>
+            <h2>Un balance de tensiones</h2>
+            <p>
+              Al recorrer la malla, las caídas de tensión suman la tensión de la
+              fuente. La resistencia disipa energía; la bobina la almacena en su
+              campo magnético y el capacitor, en su campo eléctrico.
+            </p>
+            <div class="equation">Vₛ(t) = Ri(t) + L di/dt + q(t)/C</div>
+            <p>
+              La carga del capacitor es <i>q</i> y su derivada es la corriente:
+              <i>i = dq/dt</i>. Para trabajar en segundos, usa ohmios (Ω),
+              henrios (H) y faradios (F).
+            </p>
+          </div>
+          <div class="models">
+            <h2>Tres montajes, tres lecturas</h2>
+            <dl>
+              <dt>RC</dt>
+              <dd>
+                <strong>Carga del capacitor · τ = RC</strong>
+                <p>
+                  Al aplicar un escalón a un capacitor descargado, su tensión
+                  alcanza el 63,2 % del valor final en una constante de tiempo
+                  τ. Duplicar R duplica ese tiempo.
+                </p>
+              </dd>
+              <dt>RL</dt>
+              <dd>
+                <strong>Crecimiento de la corriente · τ = L/R</strong>
+                <p>
+                  Si la corriente inicial es cero, al cabo de τ alcanza el 63,2
+                  % de Vₛ/R. A diferencia del RC, aumentar R reduce tanto τ como
+                  la corriente final.
+                </p>
+              </dd>
+              <dt>RLC</dt>
+              <dd>
+                <strong>Oscilación y amortiguamiento</strong>
+                <p>
+                  La bobina y el capacitor intercambian energía. Si R es menor
+                  que R<sub>crítica</sub> = 2√(L/C), la respuesta oscila; en el
+                  umbral es crítica y por encima es sobreamortiguada.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </details>
+      <div class="theory-actions">
+        <a href="#laboratorio" class="primary">Abrir el laboratorio　→</a>
+      </div>
+      <p class="citation">
+        Modelo ideal: no incluye tolerancias ni pérdidas parásitas. Lectura de
+        referencia: C. K. Alexander y M. N. O. Sadiku,
+        <cite>Fundamentals of Electric Circuits</cite>, 6.ª ed., capítulos 7 y
+        8.
+      </p>
+    </section>
+    <section id="lab" class="chapter bench" hidden>
+      <div class="studio">
+        <aside class="library">
+          <small>Biblioteca</small>
+          <h1>Componentes</h1>
+          <p>Inserta una pieza y une sus terminales en el plano.</p>
+          <div class="rack">
+            <button data-add="V">
+              <svg viewBox="0 0 64 28" aria-hidden="true">
+                <path
+                  d="M2 14h21m18 0h21M24 14a9 9 0 1 0 18 0a9 9 0 1 0 -18 0M27 14h5m-2.5 -2.5v5m4 -2.5h4"
+                /></svg
+              ><span>Fuente DC</span><b>＋</b></button
+            ><button data-add="R">
+              <svg viewBox="0 0 64 28" aria-hidden="true">
+                <path
+                  d="M2 14h12l4 -7 6 14 6 -14 6 14 6 -14 6 14 4 -7h10"
+                /></svg
+              ><span>Resistor</span><b>＋</b></button
+            ><button data-add="L">
+              <svg viewBox="0 0 64 28" aria-hidden="true">
+                <path
+                  d="M2 14h12a5 8 0 0 1 10 0a5 8 0 0 1 10 0a5 8 0 0 1 10 0a5 8 0 0 1 10 0h8"
+                /></svg
+              ><span>Bobina</span><b>＋</b></button
+            ><button data-add="C">
+              <svg viewBox="0 0 64 28" aria-hidden="true">
+                <path d="M2 14h26m0 -9v18m8 -18v18m0 -9h26" /></svg
+              ><span>Capacitor</span><b>＋</b>
+            </button>
+          </div>
+          <hr />
+          <small>Plantillas</small>
+          <h2>Montajes en serie</h2>
+          <div class="models-switch">
+            <button data-preset="RC">RC</button
+            ><button data-preset="RL">RL</button
+            ><button data-preset="RLC">RLC</button>
+          </div>
+          <button id="clear">＋ Nuevo esquema</button>
+          <hr />
+          <small>Cableado</small>
+          <p>
+            Arrastra de un terminal al otro. Para quitar una pieza, suéltala en
+            la caneca.
+          </p>
+        </aside>
+        <div class="drawing-sheet">
+          <div class="sheet-heading">
+            <strong id="view-title">Esquema 2D</strong
+            ><button id="projection">Ver placa 3D</button
+            ><button id="show-flow" aria-pressed="false" disabled>
+              Mostrar flujo</button
+            ><span id="part-count"></span>
+          </div>
+          <div id="free-3d" hidden></div>
+          <svg
+            id="canvas"
+            viewBox="0 0 680 420"
+            aria-label="Mesa de conexiones"
+          ></svg>
+          <div class="sheet-key">
+            <button
+              id="trash"
+              type="button"
+              aria-label="Caneca: eliminar selección"
+              title="Arrastra una pieza o un cable y suéltalo aquí"
+            >
+              <svg
+                width="19"
+                height="21"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 9v9m4-9v9"
+                /></svg
+              ><span>Caneca</span></button
+            ><span>○ Terminal</span><span>━ Cable</span
+            ><span id="board-reading">Sin señal</span>
+          </div>
+        </div>
+        <aside class="inspector">
+          <small>Inspector de pieza</small>
+          <h2 id="name"></h2>
+          <label id="val-label" for="val"></label
+          ><input
+            id="val"
+            type="number"
+            min="0.01"
+            max="10000"
+            step="any"
+          /><label id="adjust-label" for="adjust">Ajuste de la pieza</label
+          ><input type="range" id="adjust" min="0.01" step="any" /><button
+            id="rotate"
+            type="button"
+            title="Girar la pieza seleccionada 90 grados"
+          >
+            ↻ Girar 90°</button
+          ><button id="remove">Eliminar selección</button>
+          <hr />
+          <small>Medición</small><label for="probe">Medir en</label
+          ><select id="probe"></select
+          ><label for="excitation">Alimentación</label
+          ><select id="excitation">
+            <option value="step">Escalón DC</option>
+            <option value="pulse">
+              Pulso: volver a 0 V a mitad del intervalo
+            </option></select
+          ><label for="duration">Intervalo de medida</label
+          ><select id="duration">
+            <option value="10">10 ms</option>
+            <option value="60" selected>60 ms</option>
+            <option value="300">300 ms</option>
+          </select>
+        </aside>
+      </div>
+      <div class="signals">
+        <div class="signal-label">
+          OSCILOSCOPIO<span>RESPUESTA TEMPORAL</span>
+        </div>
+        <div id="readings"></div>
+      </div>
+      <div class="timeline">
+        <button id="rewind" aria-label="Volver al inicio">|◀</button
+        ><button id="transport" disabled>Pausar</button
+        ><output id="meter">Sin señal</output
+        ><label for="time-slider">Instante de la medición</label
+        ><input
+          id="time-slider"
+          type="range"
+          min="0"
+          max="599"
+          step="1"
+          value="0"
+          disabled
+        /><label for="speed">Velocidad</label
+        ><select id="speed">
+          <option value="0.5">0,5×</option>
+          <option selected value="1">1×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <p role="status" id="status"></p>
+      <p id="signal-state" role="status"></p>
+      <details class="measurement-help" open>
+        <summary>¿Qué estoy midiendo?</summary>
+        <p>
+          <b>Tensión (V):</b> diferencia de potencial entre los dos terminales
+          de la pieza elegida en «Medir en». <b>Corriente (mA):</b> carga que la
+          atraviesa por unidad de tiempo. Una lectura negativa indica sentido
+          contrario a la referencia. En la fuente se muestra la corriente
+          entregada.
+        </p>
+        <p>
+          El eje horizontal muestra milisegundos desde que se aplica la tensión.
+          «Mostrar flujo» reproduce ese intervalo a cámara lenta: los puntos
+          indican corriente convencional, no electrones individuales.
+        </p>
+      </details>
+      <p class="note">
+        Modelo ideal, sin energía inicial. Simulación numérica en 600 pasos. Las
+        tensiones y corrientes de las piezas se miden desde el terminal
+        izquierdo al derecho; en la fuente se muestra la corriente entregada.
+      </p>
+    </section>
+  </main>
+  <script type="module" src="journey.js"></script>
+</html>
