@@ -1,4 +1,3 @@
-/* Light drafting desk — navigation, reading surface and instruments share one scale. */
 :root {
   --desk: #f6f5ef;
   --sheet: #fffefa;
@@ -227,7 +226,6 @@ dialog {
   background: var(--sheet);
   color: var(--text);
 }
-/* The editor is a single work surface, with tools above the drawing rather than floating cards. */
 .bench {
   max-width: 1340px;
   padding: 28px 5%;
