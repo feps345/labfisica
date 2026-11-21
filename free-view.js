@@ -1,7 +1,6 @@
 import { trace } from "./routes.mjs";
 import * as T from "./vendor/three.module.min.js";
 import { OrbitControls } from "./vendor/OrbitControls.js";
-// Project the editable schematic's coordinates; there is no separate 3D circuit state.
 export function mountFree(el) {
   const renderer = new T.WebGLRenderer({ antialias: true }),
     scene = new T.Scene(),
