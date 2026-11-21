@@ -34,7 +34,6 @@ assert.equal(
   )[0][1],
   0.1,
 );
-// Wire flow must divide between parallel branches, and reverse if the wire is drawn backwards.
 const rr = [...parts.slice(0, 2), { id: "R2", k: "R", val: 100 }];
 let final;
 simulate(
