@@ -1,4 +1,3 @@
-// Schematic coordinates; quarter turns preserve the identity (and polarity) of each pin.
 const axes = [
   [1, 0],
   [0, 1],
