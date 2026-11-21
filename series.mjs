@@ -1,4 +1,3 @@
-/** Analytic descriptors only for a single unbranched loop; never apply series formulas to a general network. */
 export function seriesModel(parts, wires) {
   const links = new Map();
   for (const [a, b] of wires) {
