@@ -1,4 +1,3 @@
-// Sample the underdamped series step response; slow physical milliseconds down for inspection.
 const atlas = document.querySelector(".atlas"),
   time = document.querySelector("#atlas-time");
 const play = document.querySelector("#atlas-play"),
