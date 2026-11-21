@@ -1,4 +1,3 @@
-// Resistive companion models, backward Euler. The ideal step source fixes both rail voltages.
 export function simulate(
   parts,
   wires,
@@ -50,8 +49,6 @@ export function simulate(
       v: 0,
       i: 0,
     }));
-  // In each ideal-wire node route terminal injections over a spanning tree.
-  // Redundant zero-resistance links have indeterminate sharing: omit their tracers.
   const forest = [],
     adj = new Map(),
     visited = new Set();
