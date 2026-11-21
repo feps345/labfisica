@@ -20,7 +20,6 @@ function chapter() {
 }
 window.addEventListener("hashchange", chapter);
 chapter();
-// Engraved phase study: a decaying helical bundle in oblique projection.
 const engravings = [];
 for (let strand = 0; strand < 26; strand++) {
   const points = [];
@@ -37,7 +36,6 @@ for (let strand = 0; strand < 26; strand++) {
   );
 }
 document.querySelector("#windings").innerHTML = engravings.join("");
-// Route each annotation from its projected component to its HTML definition.
 const plate = document.querySelector(".atlas-body");
 function connectAnnotations() {
   const bounds = plate.getBoundingClientRect();
