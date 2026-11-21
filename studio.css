@@ -8,7 +8,6 @@
   --secondary: #b9c1cd;
   --accent-text: #99c5ff;
 }
-/* Studio: library / stage / inspector, with a shared scope and transport rail. */
 body {
   background: #16181b;
   color: #edf0f4;
@@ -434,7 +433,6 @@ body .wordmark svg {
     text-align: right;
   }
 }
-/* Keep the library title at instrument-panel scale, not the legacy chapter-title scale. */
 #lab .library h1,
 #lab .library h2 {
   font-family: "Plex Texto", sans-serif;
@@ -483,7 +481,6 @@ body .wordmark svg {
     padding: 9px;
   }
 }
-/* Reading and demonstration panels use the same shell and instrument surfaces as the bench. */
 #intro,
 #theory {
   color: var(--type);
