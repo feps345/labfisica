@@ -1,4 +1,3 @@
-// Interpolate by distance along each orthogonal wire, not directly between its ends.
 export function pointAlong(path, f) {
   const lens = path
     .slice(1)
