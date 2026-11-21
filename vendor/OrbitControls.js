@@ -11,13 +11,6 @@ import {
 	MathUtils
 } from './three.module.min.js';
 
-// OrbitControls performs orbiting, dollying (zooming), and panning.
-// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
-//
-//    Orbit - left mouse / touch: one-finger move
-//    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
-//    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
-
 const _changeEvent = { type: 'change' };
 const _startEvent = { type: 'start' };
 const _endEvent = { type: 'end' };
@@ -33,85 +26,58 @@ class OrbitControls extends EventDispatcher {
 
 		this.object = object;
 		this.domElement = domElement;
-		this.domElement.style.touchAction = 'none'; // disable touch scroll
+		this.domElement.style.touchAction = 'none';
 
-		// Set to false to disable this control
 		this.enabled = true;
 
-		// "target" sets the location of focus, where the object orbits around
 		this.target = new Vector3();
 
-		// Sets the 3D cursor (similar to Blender), from which the maxTargetRadius takes effect
 		this.cursor = new Vector3();
 
-		// How far you can dolly in and out ( PerspectiveCamera only )
 		this.minDistance = 0;
 		this.maxDistance = Infinity;
 
-		// How far you can zoom in and out ( OrthographicCamera only )
 		this.minZoom = 0;
 		this.maxZoom = Infinity;
 
-		// Limit camera target within a spherical area around the cursor
 		this.minTargetRadius = 0;
 		this.maxTargetRadius = Infinity;
 
-		// How far you can orbit vertically, upper and lower limits.
-		// Range is 0 to Math.PI radians.
-		this.minPolarAngle = 0; // radians
-		this.maxPolarAngle = Math.PI; // radians
+		this.minPolarAngle = 0;
+		this.maxPolarAngle = Math.PI;
 
-		// How far you can orbit horizontally, upper and lower limits.
-		// If set, the interval [ min, max ] must be a sub-interval of [ - 2 PI, 2 PI ], with ( max - min < 2 PI )
-		this.minAzimuthAngle = - Infinity; // radians
-		this.maxAzimuthAngle = Infinity; // radians
+		this.minAzimuthAngle = - Infinity;
+		this.maxAzimuthAngle = Infinity;
 
-		// Set to true to enable damping (inertia)
-		// If damping is enabled, you must call controls.update() in your animation loop
 		this.enableDamping = false;
 		this.dampingFactor = 0.05;
 
-		// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
-		// Set to false to disable zooming
 		this.enableZoom = true;
 		this.zoomSpeed = 1.0;
 
-		// Set to false to disable rotating
 		this.enableRotate = true;
 		this.rotateSpeed = 1.0;
 
-		// Set to false to disable panning
 		this.enablePan = true;
 		this.panSpeed = 1.0;
-		this.screenSpacePanning = true; // if false, pan orthogonal to world-space direction camera.up
-		this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
+		this.screenSpacePanning = true; 
+		this.keyPanSpeed = 7.0;	
 		this.zoomToCursor = false;
 
-		// Set to true to automatically rotate around the target
-		// If auto-rotate is enabled, you must call controls.update() in your animation loop
 		this.autoRotate = false;
-		this.autoRotateSpeed = 2.0; // 30 seconds per orbit when fps is 60
+		this.autoRotateSpeed = 2.0; 
 
-		// The four arrow keys
 		this.keys = { LEFT: 'ArrowLeft', UP: 'ArrowUp', RIGHT: 'ArrowRight', BOTTOM: 'ArrowDown' };
 
-		// Mouse buttons
 		this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
 
-		// Touch fingers
 		this.touches = { ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN };
 
-		// for reset
 		this.target0 = this.target.clone();
 		this.position0 = this.object.position.clone();
 		this.zoom0 = this.object.zoom;
 
-		// the target DOM element for key events
 		this._domElementKeyEvents = null;
-
-		//
-		// public methods
-		//
 
 		this.getPolarAngle = function () {
 
@@ -168,12 +134,10 @@ class OrbitControls extends EventDispatcher {
 
 		};
 
-		// this method is exposed, but perhaps it would be better if we can make it private...
 		this.update = function () {
 
 			const offset = new Vector3();
 
-			// so camera.up is the orbit axis
 			const quat = new Quaternion().setFromUnitVectors( object.up, new Vector3( 0, 1, 0 ) );
 			const quatInverse = quat.clone().invert();
 
@@ -189,10 +153,8 @@ class OrbitControls extends EventDispatcher {
 
 				offset.copy( position ).sub( scope.target );
 
-				// rotate offset to "y-axis-is-up" space
 				offset.applyQuaternion( quat );
 
-				// angle from z-axis around y-axis
 				spherical.setFromVector3( offset );
 
 				if ( scope.autoRotate && state === STATE.NONE ) {
@@ -212,8 +174,6 @@ class OrbitControls extends EventDispatcher {
 					spherical.phi += sphericalDelta.phi;
 
 				}
-
-				// restrict theta to be between desired limits
 
 				let min = scope.minAzimuthAngle;
 				let max = scope.maxAzimuthAngle;
@@ -238,13 +198,9 @@ class OrbitControls extends EventDispatcher {
 
 				}
 
-				// restrict phi to be between desired limits
 				spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
 
 				spherical.makeSafe();
-
-
-				// move target to panned location
 
 				if ( scope.enableDamping === true ) {
 
@@ -256,13 +212,10 @@ class OrbitControls extends EventDispatcher {
 
 				}
 
-				// Limit the target distance from the cursor to create a sphere around the center of interest
 				scope.target.sub( scope.cursor );
 				scope.target.clampLength( scope.minTargetRadius, scope.maxTargetRadius );
 				scope.target.add( scope.cursor );
 
-				// adjust the camera position based on zoom only if we're not zooming to the cursor or if it's an ortho camera
-				// we adjust zoom later in these cases
 				if ( scope.zoomToCursor && performCursorZoom || scope.object.isOrthographicCamera ) {
 
 					spherical.radius = clampDistance( spherical.radius );
@@ -275,7 +228,6 @@ class OrbitControls extends EventDispatcher {
 
 				offset.setFromSpherical( spherical );
 
-				// rotate offset back to "camera-up-vector-is-up" space
 				offset.applyQuaternion( quatInverse );
 
 				position.copy( scope.target ).add( offset );
@@ -297,15 +249,12 @@ class OrbitControls extends EventDispatcher {
 
 				}
 
-				// adjust camera position
 				let zoomChanged = false;
 				if ( scope.zoomToCursor && performCursorZoom ) {
 
 					let newRadius = null;
 					if ( scope.object.isPerspectiveCamera ) {
 
-						// move the camera down the pointer ray
-						// this method avoids floating point error
 						const prevRadius = offset.length();
 						newRadius = clampDistance( prevRadius * scale );
 
@@ -315,7 +264,6 @@ class OrbitControls extends EventDispatcher {
 
 					} else if ( scope.object.isOrthographicCamera ) {
 
-						// adjust the ortho camera position based on zoom changes
 						const mouseBefore = new Vector3( mouse.x, mouse.y, 0 );
 						mouseBefore.unproject( scope.object );
 
@@ -338,12 +286,10 @@ class OrbitControls extends EventDispatcher {
 
 					}
 
-					// handle the placement of the target
 					if ( newRadius !== null ) {
 
 						if ( this.screenSpacePanning ) {
 
-							// position the orbit target in front of the new camera position
 							scope.target.set( 0, 0, - 1 )
 								.transformDirection( scope.object.matrix )
 								.multiplyScalar( newRadius )
@@ -351,12 +297,9 @@ class OrbitControls extends EventDispatcher {
 
 						} else {
 
-							// get the ray and translation plane to compute target
 							_ray.origin.copy( scope.object.position );
 							_ray.direction.set( 0, 0, - 1 ).transformDirection( scope.object.matrix );
 
-							// if the camera is 20 degrees above the horizon then don't adjust the focus target to avoid
-							// extremely large values
 							if ( Math.abs( scope.object.up.dot( _ray.direction ) ) < TILT_LIMIT ) {
 
 								object.lookAt( scope.target );
@@ -382,10 +325,6 @@ class OrbitControls extends EventDispatcher {
 
 				scale = 1;
 				performCursorZoom = false;
-
-				// update condition is:
-				// min(camera displacement, camera rotation in radians)^2 > EPS
-				// using small-angle approximation cos(x/2) = 1 - x^2 / 8
 
 				if ( zoomChanged ||
 					lastPosition.distanceToSquared( scope.object.position ) > EPS ||
@@ -427,13 +366,7 @@ class OrbitControls extends EventDispatcher {
 
 			}
 
-			//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
-
 		};
-
-		//
-		// internals
-		//
 
 		const scope = this;
 
@@ -452,7 +385,6 @@ class OrbitControls extends EventDispatcher {
 
 		const EPS = 0.000001;
 
-		// current position in spherical coordinates
 		const spherical = new Spherical();
 		const sphericalDelta = new Spherical();
 
@@ -517,7 +449,7 @@ class OrbitControls extends EventDispatcher {
 
 			return function panLeft( distance, objectMatrix ) {
 
-				v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
+				v.setFromMatrixColumn( objectMatrix, 0 );
 				v.multiplyScalar( - distance );
 
 				panOffset.add( v );
@@ -551,7 +483,6 @@ class OrbitControls extends EventDispatcher {
 
 		}();
 
-		// deltaX and deltaY are in pixels; right and down are positive
 		const pan = function () {
 
 			const offset = new Vector3();
@@ -562,27 +493,22 @@ class OrbitControls extends EventDispatcher {
 
 				if ( scope.object.isPerspectiveCamera ) {
 
-					// perspective
 					const position = scope.object.position;
 					offset.copy( position ).sub( scope.target );
 					let targetDistance = offset.length();
 
-					// half of the fov is center to top of screen
 					targetDistance *= Math.tan( ( scope.object.fov / 2 ) * Math.PI / 180.0 );
 
-					// we use only clientHeight here so aspect ratio does not distort speed
 					panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
 					panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
 
 				} else if ( scope.object.isOrthographicCamera ) {
 
-					// orthographic
 					panLeft( deltaX * ( scope.object.right - scope.object.left ) / scope.object.zoom / element.clientWidth, scope.object.matrix );
 					panUp( deltaY * ( scope.object.top - scope.object.bottom ) / scope.object.zoom / element.clientHeight, scope.object.matrix );
 
 				} else {
 
-					// camera neither orthographic nor perspective
 					console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.' );
 					scope.enablePan = false;
 
@@ -650,10 +576,6 @@ class OrbitControls extends EventDispatcher {
 			return Math.max( scope.minDistance, Math.min( scope.maxDistance, dist ) );
 
 		}
-
-		//
-		// event callbacks - update the object state
-		//
 
 		function handleMouseDownRotate( event ) {
 
@@ -816,7 +738,6 @@ class OrbitControls extends EventDispatcher {
 
 			if ( needsUpdate ) {
 
-				// prevent the browser from scrolling on cursor keys
 				event.preventDefault();
 
 				scope.update();
@@ -914,7 +835,7 @@ class OrbitControls extends EventDispatcher {
 
 			const element = scope.domElement;
 
-			rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight ); // yes, height
+			rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientHeight );
 
 			rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight );
 
@@ -987,9 +908,6 @@ class OrbitControls extends EventDispatcher {
 
 		}
 
-		//
-		// event handlers - FSM: listen for events and reset state
-		//
 
 		function onPointerDown( event ) {
 
@@ -1398,15 +1316,11 @@ class OrbitControls extends EventDispatcher {
 
 		}
 
-		//
-
 		scope.domElement.addEventListener( 'contextmenu', onContextMenu );
 
 		scope.domElement.addEventListener( 'pointerdown', onPointerDown );
 		scope.domElement.addEventListener( 'pointercancel', onPointerUp );
 		scope.domElement.addEventListener( 'wheel', onMouseWheel, { passive: false } );
-
-		// force an update at start
 
 		this.update();
 
