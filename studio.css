@@ -666,3 +666,10 @@ body .wordmark svg {
   width: 100%;
   margin-top: 10px;
 }
+#lab .calculation-guide ol { max-width:85ch; padding-inline-start:2em; color:var(--secondary); line-height:1.6 }
+#lab .calculation-guide li { margin-block:.65em; padding-inline-start:.4em }
+#lab .calculation-guide li::marker { color:var(--accent-text); font-weight:600 }
+.inspector #rotate {
+  width: 100%;
+  margin-top: 10px;
+}
