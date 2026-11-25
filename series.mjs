@@ -22,8 +22,8 @@ export function seriesModel(parts, wires) {
     L = sum("L", (p) => p.val / 1000),
     inverseC = sum("C", (p) => 1 / (p.val * 1e-6)),
     C = inverseC ? 1 / inverseC : 0;
-  if (R && C && !L) return { type: "RC", tau: R * C };
-  if (R && L && !C) return { type: "RL", tau: L / R };
+  if (R && C && !L) return { type: "RC", R, C, tau: R * C };
+  if (R && L && !C) return { type: "RL", R, L, tau: L / R };
   if (!L || !C) return null;
   const omega = 1 / Math.sqrt(L * C),
     alpha = R / (2 * L),
@@ -31,6 +31,7 @@ export function seriesModel(parts, wires) {
     critical = Math.abs(zeta - 1) < 1e-9;
   return {
     type: "RLC",
+    R, L, C,
     alpha,
     zeta,
     f0: omega / (2 * Math.PI),
