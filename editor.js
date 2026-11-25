@@ -1,3 +1,4 @@
+import { calculationSteps } from "./calculation-guide.mjs";
 import { seriesModel, describe } from "./series.mjs";
 import { pointAlong } from "./wire-flow.mjs";
 import { trace, terminalPoint } from "./routes.mjs";
@@ -20,6 +21,7 @@ const say = (text) => ($("status").textContent = text);
 function stale() {
   $("time-slider").disabled = $("transport").disabled = true;
   lastPositions = [];
+  $("calculation-steps").textContent = "Completa el circuito y conecta la fuente para ver el procedimiento.";
   paintFlow([]);
   $("show-flow").disabled = true;
   cancelAnimationFrame(updateFrame);
@@ -439,9 +441,13 @@ function measure() {
         return `<section class="readout"><strong>${id} · ${title}</strong><svg viewBox="0 0 390 145" aria-label="${title} en función del tiempo"><path d="M55 55H380 M55 85H380 M136.25 25V115 M217.5 25V115 M298.75 25V115 M380 25V115" stroke="#303b49" fill="none"/><path d="M55 20v95h325M55 25h325" fill="none" stroke="#536680"/><g font-size="10" fill="#c8d9ed"><text x="2" y="28">${hi.toPrecision(3)}</text><text x="2" y="117">${lo.toPrecision(3)}</text><text x="55" y="136">0</text><text x="217.5" y="136" text-anchor="middle">${ms / 2}</text><text x="380" y="136" text-anchor="end">${ms} ms</text></g><line class="time-cursor" x1="55" x2="55" y1="20" y2="115" stroke="#ffe08c"/><polyline points="${pts}" fill="none" stroke="#a7d2ff" stroke-width="2"/></svg></section>`;
       })
       .join("");
+    const model = seriesModel(parts, wires);
+    $("calculation-steps").replaceChildren(...calculationSteps(model, parts, id, ms, $("excitation").value).map(text => {
+      const li = document.createElement("li"); li.textContent = text; return li;
+    }));
     state.textContent =
       `Respuesta de ${id} · ${$("excitation").value === "pulse" ? "fuente a 0 V desde " + ms / 2 + " ms" : "escalón DC"} · ventana de ${ms} ms. ` +
-      describe(seriesModel(parts, wires));
+      describe(model);
     const cursors = $("readings").querySelectorAll(".time-cursor"),
       slider = $("time-slider"),
       transport = $("transport");
